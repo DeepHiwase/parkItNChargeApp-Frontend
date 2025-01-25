@@ -1,7 +1,7 @@
 import { Mail, Notifications } from '@mui/icons-material'
 import { Avatar, Badge, Box, IconButton, Tooltip } from '@mui/material'
 import { useValue } from '../../context/ContextProvider'
-import UserMenu from '../UserMenu'
+import UserMenu from './UserMenu'
 import { useState } from 'react'
 
 const UserIcons = () => {

@@ -1,10 +1,16 @@
+import Login from './components/user/Login'
 import NavBar from "./components/NavBar"
+import Notification from "./components/Notification"
+import Loading from './components/Loading'
 
 const App = () => {
   return (
-    <div>
+    <>
+      <Loading />
+      <Notification />
+      <Login />
       <NavBar />
-    </div>
+    </>
   )
 }
 
