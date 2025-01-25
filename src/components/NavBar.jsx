@@ -8,11 +8,8 @@ import {
   Button,
 } from '@mui/material'
 import { Menu, Lock } from '@mui/icons-material'
-import photoUrl from '../user1.jpeg'
 import { useValue } from '../context/ContextProvider'
 import UserIcons from './user/UserIcons'
-
-const user = { name: 'test', photoUrl }
 
 const NavBar = () => {
   const {

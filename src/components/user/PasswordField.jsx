@@ -11,7 +11,6 @@ const PasswordField = ({ passwordRef, id='password', label='Password' }) => {
 
   return (
     <TextField
-      autoFocus
       margin='normal'
       label={label}
       type={showPassword ? 'text' : 'password'}
