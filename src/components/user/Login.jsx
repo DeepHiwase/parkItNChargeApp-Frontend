@@ -13,6 +13,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useValue } from '../../context/ContextProvider'
 import PasswordField from './PasswordField'
 import GoogleOneTapLogin from './GoogleOneTapLogin'
+import userService from '../../services/user.js'
 
 const Login = () => {
   const {
@@ -36,31 +37,23 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    //testing Notification
-    dispatch({
-      type: 'START_LOADING',
-    })
-    setTimeout(() => {
-      dispatch({
-        type: 'STOP_LOADING',
-      })
-    }, 6000)
-
-    //testing Notification
+    const email = emailRef.current.value
     const password = passwordRef.current.value
+    if (!isRegister) return userService.login({ email, password }, dispatch)
+    const name = nameRef.current.value
     const confirmPassword = confirmPasswordRef.current.value
-    if (password !== confirmPassword) {
-      dispatch({
+    if (password !== confirmPassword)
+      return dispatch({
         type: 'UPDATE_ALERT',
         payload: {
           open: true,
           severity: 'error',
-          message: 'Password and Confirm Password do not match!',
+          message: 'Passwords do not match',
         },
       })
-      return
-    }
+    userService.register({ name, email, password }, dispatch)
   }
+
   return (
     <Dialog open={openLogin} onClose={handleClose}>
       <DialogTitle>
@@ -118,7 +111,7 @@ const Login = () => {
             />
           )}
         </DialogContent>
-        <DialogActions sx={{px: '19px'}}>
+        <DialogActions sx={{ px: '19px' }}>
           <Button type='submit' varient='contained' endIcon={<Send />}>
             Submit
           </Button>
