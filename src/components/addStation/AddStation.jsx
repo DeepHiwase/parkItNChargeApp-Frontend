@@ -7,12 +7,16 @@ import {
   StepButton,
   Stepper,
 } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AddDetails from './addDetails/AddDetails'
 import AddImages from './addImages/AddImages'
 import AddLocation from './addLocation/AddLocation'
+import { useValue } from '../../context/ContextProvider'
 
 const AddStation = () => {
+  const {
+    state: { images, details, location },
+  } = useValue()
   const [activeStep, setActiveStep] = useState(0)
   const [steps, setSteps] = useState([
     { label: 'Location', completed: false },
@@ -37,6 +41,34 @@ const AddStation = () => {
   const findUnfinished = () => {
     return steps.findIndex((step) => !step.completed)
   }
+
+  useEffect(() => {
+    if (images.length) {
+      if (!steps[2].completed) setComplete(2, true)
+    } else {
+      if (steps[2].completed) setComplete(2, false)
+    }
+  }, [images])
+  useEffect(() => {
+    if (details.name.length > 4 && details.description.length > 9) {
+      if (!steps[1].completed) setComplete(1, true)
+    } else {
+      if (steps[1].completed) setComplete(1, false)
+    }
+  }, [details])
+  useEffect(() => {
+    if (location.lng || location.lat) {
+      if (!steps[0].completed) setComplete(0, true)
+    } else {
+      if (steps[0].completed) setComplete(0, false)
+    }
+  }, [location])
+  const setComplete = (index, status) => {
+    setSteps((steps) => {
+      steps[index].completed = status
+      return [...steps]
+    })
+  }
   return (
     <Container sx={{ my: 4 }}>
       <Stepper
@@ -54,11 +86,13 @@ const AddStation = () => {
         ))}
       </Stepper>
       <Box>
-        {{
-          0: <AddLocation />,
-          1: <AddDetails />,
-          2: <AddImages />,
-        }[activeStep]}
+        {
+          {
+            0: <AddLocation />,
+            1: <AddDetails />,
+            2: <AddImages />,
+          }[activeStep]
+        }
       </Box>
       <Stack
         direction='row'

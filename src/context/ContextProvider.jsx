@@ -4,9 +4,12 @@ import reducer from './reducer'
 const initialState = {
   currentUser: null,
   openLogin: false,
-  alert: { open:false, severity:'info', message: ''},
+  alert: { open: false, severity: 'info', message: '' },
   loading: false,
   profile: { open: false, file: null, photoURL: '' },
+  images: [],
+  location: {lng: 0, lat: 0},
+  details: {name: '', description: '', price: 10}
 }
 
 const Context = createContext(initialState)
