@@ -33,6 +33,14 @@ const reducer = (state, action) => {
     case 'UPDATE_DETAILS':
       return { ...state, details: { ...state.details, ...action.payload } }
 
+    case 'RESET_STATION':
+      return {
+        ...state,
+        images: [],
+        details: { title: '', description: '', price: 10 },
+        location: { lng: 0, lat: 0 },
+      }
+
     default:
       throw new Error('No matched action!')
   }

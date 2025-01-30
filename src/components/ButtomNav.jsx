@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from 'react'
 import ClusterMap from './map/ClusterMap';
 import Stations from './stations/Stations';
 import AddStation from './addStation/AddStation';
+import Protected from './protected/Protected';
 
 const ButtonNav = () => {
   const [value, setValue] = useState(0)
@@ -22,7 +23,7 @@ const ButtonNav = () => {
       {{
         0: <ClusterMap />,
         1: <Stations />,
-        2: <AddStation />,
+        2: <Protected><AddStation setPage={setValue} /></Protected>,
       }[value]}
       <Paper
         elevation={3}

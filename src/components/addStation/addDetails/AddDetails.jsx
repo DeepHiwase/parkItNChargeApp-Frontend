@@ -9,7 +9,7 @@ import {
 } from '@mui/material'
 import { useState } from 'react'
 import { useValue } from '../../../context/ContextProvider'
-import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+// import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import InfoField from './InfoField';
 
 const AddDetails = () => {
