@@ -5,6 +5,7 @@ import ReactMapGL, { Marker } from 'react-map-gl'
 import SuperCluster from 'supercluster'
 import './cluster.css'
 import { Avatar, Paper, Tooltip } from '@mui/material'
+import GeocoderInput from '../sidebar/GeocoderInput.jsx'
 
 const supercluster = new SuperCluster({
   radius: 75,
@@ -13,7 +14,7 @@ const supercluster = new SuperCluster({
 
 const ClusterMap = () => {
   const {
-    state: { stations },
+    state: { filteredStations },
     dispatch,
     mapRef,
   } = useValue()
@@ -26,7 +27,7 @@ const ClusterMap = () => {
     stationServices.getStations(dispatch)
   }, [])
   useEffect(() => {
-    const points = stations.map((station) => ({
+    const points = filteredStations.map((station) => ({
       type: 'Feature',
       properties: {
         cluster: false,
@@ -46,7 +47,7 @@ const ClusterMap = () => {
       },
     }))
     setPoints(points)
-  }, [stations])
+  }, [filteredStations])
 
   useEffect(() => {
     supercluster.load(points)
@@ -120,6 +121,7 @@ const ClusterMap = () => {
           </Marker>
         )
       })}
+      <GeocoderInput />
     </ReactMapGL>
   )
 }

@@ -45,6 +45,37 @@ const reducer = (state, action) => {
       return {
         ...state,
         stations: action.payload,
+        addressFilter: null,
+        priceFilter: 50,
+        filteredStations: action.payload,
+      }
+
+    case 'FILTER_PRICE':
+      return {
+        ...state,
+        priceFilter: action.payload,
+        filteredStations: applyFilter(
+          state.stations,
+          state.addressFilter,
+          action.payload
+        ),
+      }
+    case 'FILTER_ADDRESS':
+      return {
+        ...state,
+        addressFilter: action.payload,
+        filteredStations: applyFilter(
+          state.stations,
+          action.payload,
+          state.priceFilter
+        ),
+      }
+    case 'CLEAR_ADDRESS':
+      return {
+        ...state,
+        addressFilter: null,
+        priceFilter: 50,
+        filteredStations: state.stations,
       }
 
     default:
@@ -53,3 +84,25 @@ const reducer = (state, action) => {
 }
 
 export default reducer
+
+const applyFilter = (stations, address, price) => {
+  let filteredStations = stations
+  if (address) {
+    const { lng, lat } = address
+    filteredStations = filteredStations.filter((station) => {
+      const lngDifference =
+        lng > station.lng ? lng - station.lng : station.lng - lng
+      const latDifference =
+        lat > station.lat ? lat - station.lat : station.lat - lat
+      return lngDifference <= 1 && latDifference <= 1
+    })
+  }
+
+  if (price < 50) {
+    filteredStations = filteredStations.filter(
+      (station) => station.price <= price
+    )
+  }
+
+  return filteredStations
+}
