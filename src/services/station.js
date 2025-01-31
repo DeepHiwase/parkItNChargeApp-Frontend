@@ -17,10 +17,20 @@ const createStation = async (station, currentUser, dispatch, setPage) => {
         message: 'The station has been added successfully',
       },
     })
-    dispatch({ type: 'RESET_STATION'})
+    dispatch({ type: 'RESET_STATION' })
     setPage(0)
   }
   dispatch({ type: 'STOP_LOADING' })
 }
 
-export default createStation
+const getStations = async (dispatch) => {
+  const result = await fetchData({ url, method: 'GET' }, dispatch)
+  if (result) {
+    dispatch({ type: 'UPDATE_STATIONS', payload: result })
+  }
+}
+
+export default {
+  createStation,
+  getStations
+}

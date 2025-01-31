@@ -41,6 +41,12 @@ const reducer = (state, action) => {
         location: { lng: 0, lat: 0 },
       }
 
+    case 'UPDATE_STATIONS':
+      return {
+        ...state,
+        stations: action.payload,
+      }
+
     default:
       throw new Error('No matched action!')
   }

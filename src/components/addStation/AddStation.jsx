@@ -13,7 +13,7 @@ import AddImages from './addImages/AddImages'
 import AddLocation from './addLocation/AddLocation'
 import { useValue } from '../../context/ContextProvider'
 import { Send } from '@mui/icons-material'
-import createStation from '../../services/station'
+import stationServices from '../../services/station'
 
 const AddStation = ({ setPage }) => {
   const {
@@ -92,7 +92,7 @@ const AddStation = ({ setPage }) => {
       description: details.description,
       images: imagesUrl,
     }
-    createStation(station, currentUser, dispatch, setPage)
+    stationServices.createStation(station, currentUser, dispatch, setPage)
   }
   return (
     <Container sx={{ my: 4 }}>
