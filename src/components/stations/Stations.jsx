@@ -14,6 +14,7 @@ import { StarBorder } from '@mui/icons-material'
 const Stations = () => {
   const {
     state: { filteredStations },
+    dispatch,
   } = useValue()
   return (
     <Container>
@@ -55,6 +56,9 @@ const Stations = () => {
                 alt={station.name}
                 loading='lazy'
                 style={{ cursor: 'pointer' }}
+                onClick={() =>
+                  dispatch({ type: 'UPDATE_STATION', payload: station })
+                }
               />
               <ImageListItemBar
                 title={station.name}

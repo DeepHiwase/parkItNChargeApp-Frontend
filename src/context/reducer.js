@@ -78,6 +78,9 @@ const reducer = (state, action) => {
         filteredStations: state.stations,
       }
 
+    case 'UPDATE_STATION':
+      return { ...state, station: action.payload }
+
     default:
       throw new Error('No matched action!')
   }

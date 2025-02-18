@@ -14,6 +14,7 @@ const initialState = {
   priceFilter: 50,
   addressFilter: null,
   filteredStations: [],
+  station: null,
 }
 
 const Context = createContext(initialState)
