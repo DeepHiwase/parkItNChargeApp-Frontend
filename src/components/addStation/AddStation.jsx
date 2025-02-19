@@ -83,7 +83,23 @@ const AddStation = ({ setPage }) => {
   }, [steps])
 
   const handleSubmit = () => {
-    const imagesUrl = images.map((image) => image.url)
+    console.log('Images array:', images)
+    // const imagesUrl = images.map((image) => image.url)
+    const imagesUrl = images.map(image => {
+      // Handle both cases: when image is an object with url property or when it's a direct URL string
+      return typeof image === 'object' ? image.url : image
+    })
+    if (imagesUrl.length === 0) {
+      dispatch({
+        type: 'UPDATE_ALERT',
+        payload: {
+          open: true,
+          severity: 'error',
+          message: 'Please upload at least one image',
+        },
+      })
+      return
+    }
     const station = {
       lng: location.lng,
       lat: location.lat,
@@ -92,6 +108,7 @@ const AddStation = ({ setPage }) => {
       description: details.description,
       images: imagesUrl,
     }
+    console.log('Submitting station:', station)
     stationServices.createStation(station, currentUser, dispatch, setPage)
   }
   return (

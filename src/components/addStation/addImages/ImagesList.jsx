@@ -69,12 +69,9 @@ const ImagesList = () => {
       console.error('File path could not be extracted from the URL')
       return
     }
-    // const imageName = image?.split(`${currentUser?.id}%2F`)[1]?.split('?')[0]
     try {
-      // await deleteFile(`stations/${currentUser?.id}/${imageName}`)
       await deleteFile(filePath)
     } catch (error) {
-      // console.log(error)
       console.error('Error deleting file:', error)
     }
   }

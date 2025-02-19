@@ -90,12 +90,12 @@ const Station = () => {
             slideShadows: true,
           }}
         >
-          {station?.images?.map((url) => (
-            <SwiperSlide key={url}>
+          {station?.images?.map((url, index) => (
+            <SwiperSlide key={`image-${index}`}>
               <div className='swiper-zoom-container'>
                 <img
                   src={url}
-                  alt='station'
+                  alt={`station-${index + 1}`}
                   style={{ width: '100%', objectFit: 'cover' }}
                 />
               </div>

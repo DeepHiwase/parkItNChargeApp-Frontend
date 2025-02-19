@@ -24,6 +24,11 @@ const ProgressItem = ({ file }) => {
         imageName,
         setProgress
       )
+      console.log('Received URL from upload:', url) 
+
+    if (!url) {
+      throw new Error('No URL received from upload')
+    }
 
       dispatch({ type: 'UPDATE_IMAGES', payload: url })
       setProgress(100)
@@ -34,11 +39,12 @@ const ProgressItem = ({ file }) => {
         setImageURL(null)
       }, 2000)
     } catch (error) {
+      console.error('Upload error:', error)
       dispatch({
         type: 'UPDATE_ALERT',
-        payload: { open: true, severity: 'error', message: error.message },
+        payload: { open: true, severity: 'error', message: `Upload failed: ${error.message}` },
       })
-      console.log(error)
+      console.error('Upload error:', error)
     }
   }, [file, currentUser, dispatch])
 
