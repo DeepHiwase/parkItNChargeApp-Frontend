@@ -19,6 +19,7 @@ const createStation = async (station, currentUser, dispatch, setPage) => {
     })
     dispatch({ type: 'RESET_STATION' })
     setPage(0)
+    dispatch({ type: 'UPDATE_STATION', payload: result })
   }
   dispatch({ type: 'STOP_LOADING' })
 }
@@ -32,5 +33,5 @@ const getStations = async (dispatch) => {
 
 export default {
   createStation,
-  getStations
+  getStations,
 }

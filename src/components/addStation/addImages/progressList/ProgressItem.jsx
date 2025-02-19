@@ -7,7 +7,6 @@ import uploadFileProgress from '../../../../supabase/uploadFileProgress.js'
 import { useValue } from '../../../../context/ContextProvider'
 
 const ProgressItem = ({ file }) => {
-  console.log('ProgressItem', file)
   const [progress, setProgress] = useState(0)
   const [imageURL, setImageURL] = useState(null)
   const [uploadComplete, setUploadComplete] = useState(false)

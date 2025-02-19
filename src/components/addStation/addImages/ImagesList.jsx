@@ -15,8 +15,6 @@ const ImagesList = () => {
     state: { images, currentUser },
     dispatch,
   } = useValue()
-  console.log(images)
-  console.log(currentUser)
   useEffect(() => {
     const fetchImages = async () => {
       if (currentUser?.id) {
@@ -59,8 +57,6 @@ const ImagesList = () => {
     fetchImages()
   }, [currentUser, dispatch])
   const handleDelete = async (image) => {
-    console.log('Image:', image);
-  console.log('Type of image:', typeof image);
 
     if (!image || typeof image !== 'object' || !image.url) {
       console.error('Invalid image object:', image);
@@ -77,7 +73,6 @@ const ImagesList = () => {
     try {
       // await deleteFile(`stations/${currentUser?.id}/${imageName}`)
       await deleteFile(filePath)
-      console.log('File deleted successfully')
     } catch (error) {
       // console.log(error)
       console.error('Error deleting file:', error)
