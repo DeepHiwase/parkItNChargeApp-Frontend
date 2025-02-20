@@ -15,9 +15,15 @@ const reducer = (state, action) => {
 
     case 'UPDATE_PROFILE':
       return { ...state, profile: action.payload }
-    case 'UPDATE_USER':
-      localStorage.setItem('currentUser', JSON.stringify(action.payload))
-      return { ...state, currentUser: action.payload }
+      case 'UPDATE_USER':
+        if (action.payload) {
+          localStorage.setItem('currentUser', JSON.stringify(action.payload));
+          localStorage.setItem('token', action.payload.token); // Make sure this is set
+        } else {
+          localStorage.removeItem('currentUser');
+          localStorage.removeItem('token');
+        }
+        return { ...state, currentUser: action.payload };
 
     case 'UPDATE_IMAGES':
       // return { ...state, images: [...state.images, action.payload] }
@@ -84,6 +90,31 @@ const reducer = (state, action) => {
 
     case 'UPDATE_STATION':
       return { ...state, station: action.payload }
+
+    // Add these cases to your existing reducer
+case 'ADD_FEEDBACK':
+  return {
+    ...state,
+    stations: state.stations.map(station =>
+      station._id === action.payload.stationId
+        ? { ...station, feedback: [...station.feedback, action.payload.feedback] }
+        : station
+    )
+  };
+
+case 'UPDATE_STATION_RATING':
+  return {
+    ...state,
+    stations: state.stations.map(station =>
+      station._id === action.payload.stationId
+        ? { 
+            ...station, 
+            averageRating: action.payload.averageRating,
+            totalRatings: action.payload.totalRatings 
+          }
+        : station
+    )
+  };
 
     default:
       throw new Error('No matched action!')

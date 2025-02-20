@@ -23,6 +23,8 @@ import 'swiper/css/effect-coverflow'
 // import 'swiper/css/lazy'
 import 'swiper/css/zoom'
 import './swiper.css'
+import AddFeedback from './feedback/AddFeedback'
+import FeedbackList from './feedback/FeedbackList'
 
 const Transition = forwardRef((props, ref) => {
   return <Slide direction='up' {...props} ref={ref} />
@@ -50,6 +52,9 @@ const Station = () => {
         })
     }
   }, [station])
+
+  // Add null check
+  if (!station) return null
 
   const handleClose = () => {
     dispatch({ type: 'UPDATE_STATION', payload: null })
@@ -178,6 +183,16 @@ const Station = () => {
               {'Details:'}
             </Typography>
             <Typography component='span'>{station?.description}</Typography>
+          </Stack>
+          <Stack>
+            <Box
+              sx={{
+                mt: 4
+              }} 
+            >
+              <AddFeedback stationId={station._id} />
+              <FeedbackList feedback={station.feedback} />
+            </Box>
           </Stack>
         </Stack>
       </Container>

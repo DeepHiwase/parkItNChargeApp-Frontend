@@ -31,7 +31,41 @@ const getStations = async (dispatch) => {
   }
 }
 
+const submitFeedback = async (stationId, feedbackData, token, dispatch) => {
+  if (!token) {
+    dispatch({
+      type: 'UPDATE_ALERT',
+      payload: {
+        open: true,
+        severity: 'error',
+        message: 'Please login to submit feedback',
+      },
+    });
+    return null;
+  }
+
+  dispatch({ type: 'START_LOADING' });
+  
+  const result = await fetchData({
+    url: `${url}/${stationId}/feedback`,
+    method: 'POST',
+    body: feedbackData,
+    token
+  }, dispatch);
+
+  if (result) {
+    dispatch({
+      type: 'UPDATE_STATION',
+      payload: result
+    });
+  }
+  
+  dispatch({ type: 'STOP_LOADING' });
+  return result;
+};
+
 export default {
   createStation,
   getStations,
+  submitFeedback 
 }
