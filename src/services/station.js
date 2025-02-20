@@ -1,6 +1,7 @@
 import fetchData from './utils/fetchData'
 
-const url = import.meta.env.VITE_REACT_APP_SERVER_URL + '/api/stations'
+// const url = import.meta.env.VITE_REACT_APP_SERVER_URL + '/api/stations'
+const url = '/api/stations'
 
 const createStation = async (station, currentUser, dispatch, setPage) => {
   dispatch({ type: 'START_LOADING' })
