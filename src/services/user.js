@@ -33,6 +33,14 @@ const login = async (user, dispatch) => {
   if (result) {
     dispatch({ type: 'UPDATE_USER', payload: result })
     dispatch({ type: 'CLOSE_LOGIN' })
+    dispatch({
+      type: 'UPDATE_ALERT',
+      payload: {
+        open: true,
+        severity: 'success',
+        message: 'Login successful!',
+      },
+    })
   }
 
   dispatch({ type: 'STOP_LOADING' })

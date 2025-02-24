@@ -4,6 +4,7 @@ import { useValue } from '../../../context/ContextProvider';
 import stationServices from '../../../services/station'
 
 const AddFeedback = ({ stationId }) => {
+  console.log('Station ID:', stationId); 
   const [feedback, setFeedback] = useState('');
   const [rating, setRating] = useState(0);
   const { dispatch, state: { currentUser} } = useValue();

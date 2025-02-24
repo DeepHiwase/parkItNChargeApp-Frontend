@@ -20,7 +20,6 @@ import { Navigation, Autoplay, EffectCoverflow, Zoom } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/effect-coverflow'
-// import 'swiper/css/lazy'
 import 'swiper/css/zoom'
 import './swiper.css'
 import AddFeedback from './feedback/AddFeedback'
@@ -190,7 +189,7 @@ const Station = () => {
                 mt: 4
               }} 
             >
-              <AddFeedback stationId={station._id} />
+              <AddFeedback stationId={station.stationId || station._id} />
               <FeedbackList feedback={station.feedback} />
             </Box>
           </Stack>

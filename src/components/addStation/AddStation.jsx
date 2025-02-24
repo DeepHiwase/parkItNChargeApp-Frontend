@@ -83,10 +83,7 @@ const AddStation = ({ setPage }) => {
   }, [steps])
 
   const handleSubmit = () => {
-    console.log('Images array:', images)
-    // const imagesUrl = images.map((image) => image.url)
     const imagesUrl = images.map(image => {
-      // Handle both cases: when image is an object with url property or when it's a direct URL string
       return typeof image === 'object' ? image.url : image
     })
     if (imagesUrl.length === 0) {
